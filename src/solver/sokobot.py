@@ -18,6 +18,9 @@ def get_successors(player, crates, walls):
                 if next_crate in walls or next_crate in crates:
                     continue  # Can't push crate into a wall or another crate
 
+                if is_corner_deadlock(next_crate, walls, goals):
+                    continue  # Skip this successor if it results in a corner deadlock
+
                 new_crates = list(crates)
                 new_crates.remove(next_player)
                 new_crates.append(next_crate)
